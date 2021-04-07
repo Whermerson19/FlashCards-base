@@ -10,6 +10,7 @@ export interface IUsersRepository {
   findById(id: string): Promise<User | undefined>;
   findByUsername(username: string): Promise<User | undefined>;
   findByEmail(email: string): Promise<User | undefined>;
+  findByUsernameEmail(searchField: string): Promise<User | undefined>;
   create(data: ICreateUserData): Promise<User>;
   save(user: User): Promise<User>;
 }

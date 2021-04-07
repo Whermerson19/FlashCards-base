@@ -40,6 +40,14 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  async findByUsernameEmail(searchField: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({
+      where: [{ username: searchField }, { email: searchField }],
+    });
+
+    return user;
+  }
+
   async create({ username, email, password }: ICreateUserData): Promise<User> {
     const user = this.ormRepository.create({
       username,
