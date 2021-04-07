@@ -55,6 +55,5 @@ export class CreateFoldersTable1617822983982 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey("folders", "FOLDERS-USER_ID");
-    await queryRunner.dropTable("folders");
   }
 }
