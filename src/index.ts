@@ -1,6 +1,9 @@
 import "reflect-metadata";
 import express, { Request, Response, NextFunction } from "express";
 
+import "express-async-errors";
+
+import { errors } from 'celebrate'
 import { AppError } from "./errors/AppError";
 import appRouter from "./routes";
 
@@ -9,6 +12,8 @@ import "./database";
 const app = express();
 app.use(express.json());
 
+app.use(appRouter);
+app.use(errors());
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError) {
@@ -27,4 +32,4 @@ app.use(
   }
 );
 
-app.use(appRouter);
+app.listen(3333, () => console.log("server isRunning"));
