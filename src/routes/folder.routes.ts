@@ -29,3 +29,5 @@ folderRouter.put(
   }),
   foldersController.update
 );
+
+folderRouter.delete("/:folderId", foldersController.delete);

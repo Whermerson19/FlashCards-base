@@ -1,6 +1,7 @@
 import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import { CreateFolderService } from "../../services/Folders/CreateFolderService";
+import { DeleteFolderService } from "../../services/Folders/DeleteFolderService";
 import { IndexFolderService } from "../../services/Folders/IndexFolderService";
 import { UpdateFolderService } from "../../services/Folders/UpdateFolderService";
 
@@ -46,5 +47,21 @@ export class FoldersController {
     });
 
     return response.status(201).json(classToClass(folder));
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const service = new DeleteFolderService();
+
+    const userId = request.user.id;
+    const { folderId } = request.params;
+
+    await service.init({
+      userId,
+      folderId,
+    });
+
+    return response
+      .status(200)
+      .json({ success: "Deleted folder successfully" });
   }
 }
