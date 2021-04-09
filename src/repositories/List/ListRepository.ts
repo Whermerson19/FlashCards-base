@@ -42,4 +42,8 @@ export class ListRepository implements IListRepository {
   async save(list: List): Promise<List> {
     return this.ormRepository.save(list);
   }
+
+  async delete(listId: string): Promise<void> {
+    await this.ormRepository.delete(listId);
+  }
 }

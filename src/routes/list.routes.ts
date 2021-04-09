@@ -30,3 +30,5 @@ listRouter.put(
   }),
   listController.update
 );
+
+listRouter.delete("/:listId", listController.delete);

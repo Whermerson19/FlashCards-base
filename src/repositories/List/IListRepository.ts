@@ -10,4 +10,5 @@ export interface IListRepository {
   findById(id: string): Promise<List | undefined>;
   create(data: ICreateListData): Promise<List>;
   save(list: List): Promise<List>;
+  delete(listId: string): Promise<void>;
 }

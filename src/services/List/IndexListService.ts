@@ -7,7 +7,7 @@ interface IRequest {
   userId: string;
 }
 
-export class IndexListerService {
+export class IndexListService {
   async init({ userId }: IRequest): Promise<List[]> {
     const usersRepository = new UsersRepository();
     const listRepository = new ListRepository();
