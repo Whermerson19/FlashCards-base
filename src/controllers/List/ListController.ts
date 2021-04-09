@@ -24,10 +24,12 @@ export class ListController {
 
     const userId = request.user.id;
     const { title } = request.body;
+    const { folderId } = request.query;
 
     const list = await service.init({
       userId,
       title,
+      folderId: folderId? String(folderId) : null,
     });
 
     return response.status(201).json(classToClass(list));

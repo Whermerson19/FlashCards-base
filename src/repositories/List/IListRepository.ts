@@ -3,6 +3,7 @@ import { List } from '../../models/List'
 export interface ICreateListData {
   title: string;
   userId: string;
+  folderId?: string | null;
 }
 
 export interface IListRepository {

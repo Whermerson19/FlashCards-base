@@ -5,8 +5,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinColumn
+  JoinColumn,
 } from "typeorm";
+import { Folder } from "./Folder";
 import { User } from "./User";
 
 @Entity("list")
@@ -23,6 +24,13 @@ export class List {
   @ManyToOne(() => User, { eager: true })
   @JoinColumn({ name: "userId" })
   user: User;
+
+  @Column()
+  folderId?: string | null;
+
+  @ManyToOne(() => Folder, { eager: true })
+  @JoinColumn({ name: "folderId" })
+  folder: Folder;
 
   @CreateDateColumn()
   createdAt: Date;

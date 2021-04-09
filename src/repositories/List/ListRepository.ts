@@ -30,10 +30,11 @@ export class ListRepository implements IListRepository {
     return list;
   }
 
-  async create({ title, userId }: ICreateListData): Promise<List> {
+  async create({ title, userId, folderId }: ICreateListData): Promise<List> {
     const list = this.ormRepository.create({
       title,
       userId,
+      folderId: folderId ? folderId : null,
     });
 
     return this.ormRepository.save(list);

@@ -7,10 +7,11 @@ import { UsersRepository } from "../../repositories/User/UsersRepository";
 interface IRequest {
   title: string;
   userId: string;
+  folderId?: string | null;
 }
 
 export class CreateListService {
-  async init({ title, userId }: IRequest): Promise<List> {
+  async init({ title, userId, folderId }: IRequest): Promise<List> {
     const listRepository = new ListRepository();
     const usersRepository = new UsersRepository();
 
@@ -20,6 +21,7 @@ export class CreateListService {
     const list = await listRepository.create({
       title,
       userId,
+      folderId: folderId ? folderId : null
     });
 
     return list;
