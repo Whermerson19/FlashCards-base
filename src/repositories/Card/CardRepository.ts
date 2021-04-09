@@ -9,11 +9,13 @@ export class CardRepository implements ICardRepository {
     this.ormRepository = getRepository(Card);
   }
 
-  async indexCards(listId: string): Promise<Card[]> {
+  async indexCards(listId: string, page: number): Promise<Card[]> {
     const index = await this.ormRepository.find({
       where: {
         listId,
       },
+      take: 5,
+      skip: page * 5 - 5
     });
 
     return index;

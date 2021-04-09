@@ -8,7 +8,7 @@ export interface ICreateCardData {
 }
 
 export interface ICardRepository {
-  indexCards(listId: string): Promise<Card[]>;
+  indexCards(listId: string, page: number): Promise<Card[]>;
   findById(id: string): Promise<Card | undefined>;
   create(data: ICreateCardData): Promise<Card>;
   save(card: Card): Promise<Card>;
