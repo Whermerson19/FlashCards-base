@@ -21,3 +21,14 @@ cardRouter.post(
   }),
   cardsController.create
 );
+
+cardRouter.put(
+  "/id/:cardId",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      front: Joi.string().required().max(200),
+      versus: Joi.string().required().max(200),
+    }),
+  }),
+  cardsController.update
+);

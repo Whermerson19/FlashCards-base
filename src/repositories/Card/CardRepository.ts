@@ -14,8 +14,8 @@ export class CardRepository implements ICardRepository {
       where: {
         listId,
       },
-      take: 5,
-      skip: page * 5 - 5
+      take: 10,
+      skip: page * 10 - 10
     });
 
     return index;
