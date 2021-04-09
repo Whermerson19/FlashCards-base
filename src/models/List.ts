@@ -4,7 +4,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn
 } from "typeorm";
+import { User } from "./User";
 
 @Entity("list")
 export class List {
@@ -16,6 +19,10 @@ export class List {
 
   @Column()
   userId: string;
+
+  @ManyToOne(() => User, { eager: true })
+  @JoinColumn({ name: "userId" })
+  user: User;
 
   @CreateDateColumn()
   createdAt: Date;

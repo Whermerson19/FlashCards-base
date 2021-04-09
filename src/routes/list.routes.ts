@@ -9,6 +9,8 @@ const listController = new ListController();
 
 listRouter.use(Authorization);
 
+listRouter.get("/", listController.index);
+
 listRouter.post(
   "/",
   celebrate({
@@ -17,4 +19,14 @@ listRouter.post(
     }),
   }),
   listController.create
+);
+
+listRouter.put(
+  "/:listId",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      title: Joi.string().required(),
+    }),
+  }),
+  listController.update
 );

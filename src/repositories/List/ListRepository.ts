@@ -1,7 +1,7 @@
-import { List } from '../../models/List';
-import { Repository, getRepository } from 'typeorm'
+import { List } from "../../models/List";
+import { Repository, getRepository } from "typeorm";
 
-import { IListRepository, ICreateListData } from './IListRepository'
+import { IListRepository, ICreateListData } from "./IListRepository";
 
 export class ListRepository implements IListRepository {
   private ormRepository: Repository<List>;
@@ -10,11 +10,21 @@ export class ListRepository implements IListRepository {
     this.ormRepository = getRepository(List);
   }
 
+  async indexLists(userId: string): Promise<List[] | undefined> {
+    const index = await this.ormRepository.find({
+      where: {
+        userId,
+      },
+    });
+
+    return index;
+  }
+
   async findById(id: string): Promise<List | undefined> {
     const list = await this.ormRepository.findOne({
       where: {
-        id
-      }
+        id,
+      },
     });
 
     return list;
@@ -23,7 +33,7 @@ export class ListRepository implements IListRepository {
   async create({ title, userId }: ICreateListData): Promise<List> {
     const list = this.ormRepository.create({
       title,
-      userId
+      userId,
     });
 
     return this.ormRepository.save(list);

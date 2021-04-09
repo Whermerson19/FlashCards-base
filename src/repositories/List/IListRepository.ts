@@ -6,6 +6,7 @@ export interface ICreateListData {
 }
 
 export interface IListRepository {
+  indexLists(userId: string): Promise<List[] | undefined>;
   findById(id: string): Promise<List | undefined>;
   create(data: ICreateListData): Promise<List>;
   save(list: List): Promise<List>;
