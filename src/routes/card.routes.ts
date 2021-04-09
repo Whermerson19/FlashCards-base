@@ -32,3 +32,5 @@ cardRouter.put(
   }),
   cardsController.update
 );
+
+cardRouter.delete("/id/:cardId", cardsController.delete);

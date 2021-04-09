@@ -1,6 +1,7 @@
 import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import { CreateCardService } from "../../services/Cards/CreateCardService";
+import { DeleteCardService } from "../../services/Cards/DeleteCardService";
 import { IndexCardService } from "../../services/Cards/IndexCardService";
 import { UpdateCardSerice } from "../../services/Cards/UpdateCardSerice";
 
@@ -54,5 +55,19 @@ export class CardsController {
     });
 
     return response.status(201).json(classToClass(card));
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const service = new DeleteCardService();
+
+    const userId = request.user.id;
+    const { cardId } = request.params;
+
+    await service.init({
+      userId,
+      cardId,
+    });
+
+    return response.status(200).json({ success: "Deleted card successfully" });
   }
 }
