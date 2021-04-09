@@ -19,3 +19,13 @@ folderRouter.post(
   }),
   foldersController.create
 );
+
+folderRouter.put(
+  "/:folderId",
+  celebrate({
+    [Segments.BODY]: {
+      title: Joi.string().required().max(20),
+    },
+  }),
+  foldersController.update
+);

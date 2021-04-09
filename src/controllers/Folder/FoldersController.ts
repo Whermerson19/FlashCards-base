@@ -2,6 +2,7 @@ import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import { CreateFolderService } from "../../services/Folders/CreateFolderService";
 import { IndexFolderService } from "../../services/Folders/IndexFolderService";
+import { UpdateFolderService } from "../../services/Folders/UpdateFolderService";
 
 export class FoldersController {
   async index(request: Request, response: Response): Promise<Response> {
@@ -24,6 +25,23 @@ export class FoldersController {
 
     const folder = await service.init({
       userId,
+      title,
+    });
+
+    return response.status(201).json(classToClass(folder));
+  }
+
+  async update(request: Request, response: Response): Promise<Response> {
+    const service = new UpdateFolderService();
+
+    const userId = request.user.id;
+    const { folderId } = request.params;
+
+    const { title } = request.body;
+
+    const folder = await service.init({
+      userId,
+      folderId,
       title,
     });
 
