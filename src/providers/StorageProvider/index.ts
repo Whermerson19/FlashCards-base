@@ -6,7 +6,7 @@ export class StorageProvider {
   async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
       path.resolve(uploadConfig.directory, file),
-      path.resolve(uploadConfig.uploadFolder)
+      path.resolve(uploadConfig.uploadFolder, file)
     );
 
     return file;
