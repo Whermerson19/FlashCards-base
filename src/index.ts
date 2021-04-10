@@ -1,17 +1,19 @@
 import "reflect-metadata";
 import express, { Request, Response, NextFunction } from "express";
-import cors from 'cors'
+import cors from "cors";
 import "express-async-errors";
 
-import { errors } from 'celebrate'
+import { errors } from "celebrate";
 import { AppError } from "./errors/AppError";
 import appRouter from "./routes";
-
+import uploadConfig from "./config/upload";
 import "./database";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use("/files", express.static(uploadConfig.uploadFolder));
 
 app.use(appRouter);
 app.use(errors());
