@@ -19,7 +19,7 @@ export function Authorization(
   const authHeaders = request.headers.authorization;
   if (!authHeaders) throw new AppError("JWT Token is missing");
 
-  const [, token] = authHeaders.split(" ");
+  const [, token] = authHeaders.split(" "); //Bearer token ["Bearer", "sdlfgjsdkjgkshgks"]
 
   const verifyToken = verify(token, authConfig.jwt.secret);
   if (!verifyToken) throw new AppError("Invalid token");

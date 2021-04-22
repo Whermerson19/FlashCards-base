@@ -1,15 +1,19 @@
 import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
 import { CardsController } from "../controllers/Card/CardsController";
+import { ListAllCardsController } from "../controllers/Card/ListAllCardsController";
 import { Authorization } from "../middlewares/Authorization";
 
 export const cardRouter = Router();
 
 const cardsController = new CardsController();
+const listAllCardsController = new ListAllCardsController();
 
 cardRouter.use(Authorization);
 
 cardRouter.get("/list/:listId/page/:page", cardsController.index);
+
+cardRouter.get("/", listAllCardsController.index);
 
 cardRouter.post(
   "/list/:listId",
