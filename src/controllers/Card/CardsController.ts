@@ -10,12 +10,11 @@ export class CardsController {
     const service = new IndexCardService();
 
     const userId = request.user.id;
-    const { listId, page } = request.params;
+    const { listId } = request.params;
 
     const cards = await service.init({
       userId,
       listId,
-      page: Number(page),
     });
 
     return response.status(200).json(classToClass(cards));

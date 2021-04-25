@@ -7,11 +7,10 @@ import { UsersRepository } from "../../repositories/User/UsersRepository";
 interface IRequest {
   userId: string;
   listId: string;
-  page: number;
 }
 
 export class IndexCardService {
-  async init({ userId, listId, page }: IRequest): Promise<Card[]> {
+  async init({ userId, listId }: IRequest): Promise<Card[]> {
     const usersRepository = new UsersRepository();
     const listRepository = new ListRepository();
     const cardsRepository = new CardRepository();
@@ -22,7 +21,7 @@ export class IndexCardService {
     const list = await listRepository.findById(listId);
     if (!list) throw new AppError("List not found", 404);
 
-    const cards = await cardsRepository.indexCards(listId, page);
+    const cards = await cardsRepository.indexCards(listId);
     console.log(cards.length)
     return cards;
   }

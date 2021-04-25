@@ -9,7 +9,7 @@ export interface ICreateCardData {
 
 export interface ICardRepository {
   listAll(user_id: string): Promise<Card[]>
-  indexCards(listId: string, page: number): Promise<Card[]>;
+  indexCards(listId: string): Promise<Card[]>;
   findById(id: string): Promise<Card | undefined>;
   create(data: ICreateCardData): Promise<Card>;
   save(card: Card): Promise<Card>;
